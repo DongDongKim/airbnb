@@ -14,24 +14,29 @@ function needAuth(req, res, next) {
 router.get('/', needAuth, function(req, res, next) {
   Room.find({user: req.user.id}, function(err, rooms) {
     if (err) {
-      return res.status(500).json({message: 'internal error', desc: err});
+      return res.status(500).json({message: 'interfefnal error', desc: err});
     }
     res.json(rooms);
   });
 });
 
-router.post('/', needAuth, function(req, res, next) {
+router.post('/', function(req, res, next) {
   if (!req.body.content) {
     return res.status(400).json({message: 'need content'});
   }
-  var Room = new Room({
+  var newRoom = new Room({
+    name: req.body.name,
     content: req.body.content,
-    category: req.body.category || "N/A",
-    priority: req.body.priority || 3,
-    deadline: req.body.deadline,
-    user: req.user.id
+    city: req.body.city,
+    address: req.body.address,
+    convenience: req.body.convenience,
+    fee: req.body.fee,
+    person:req.body.person,
+    during: req.body.during,
+    reservation: req.body.reservation,
+    //user: "?"//req.user.id
   });
-  Room.save(function(err, doc) {
+  newRoom.save(function(err, doc) {
     if (err) {
       return res.status(500).json({message: 'internal error', desc: err});
     }

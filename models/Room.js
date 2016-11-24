@@ -9,27 +9,33 @@ var schema = new Schema({
   address: {type: String, trim: true},
   convenience: {type: String, trim: true},
   fee: {type: Number, trim: true},
+  person:{type:Number,trim:true},
   during: Date,
   reservation: {type: Boolean, default: false},
-  user: {type: Schema.Types.ObjectId, index: true, required: true},
+ // user: {type: Schema.Types.ObjectId, required: true},
   createdAt: {type: Date, default: Date.now}
 }, {
   toJSON: {
     virtuals: true,
-    transform: function(task) {
+    transform: function(room) {
       return {
-        id: task._id.toString(),
-        category: task.category,
-        content: task.content,
-        priority: task.priority,
-        deadline: (task.deadline) ? moment(task.deadline).format('YYYY-MM-DD') : "N/A",
-        done: task.done
+        id: room._id.toString(),
+        name: room.name,
+        content: room.content,
+        city: room.city,
+        address: room.address,
+        convenience: room.convenience,
+        fee: room.fee,
+        person: room.person,
+        during: (room.deadline) ? moment(room.deadline).format('YYYY-MM-DD') : "N/A",
+        reservation: room.reservation,
+
       };
     }
   },
   toObject: {virtuals: true}
 });
 
-var Room = mongoose.model('Task', schema);
+var Room = mongoose.model('Room', schema);
 
 module.exports = Room;

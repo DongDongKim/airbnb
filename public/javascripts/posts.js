@@ -1,7 +1,7 @@
 /*global $:false */
 /*global _:false */
 /*jslint browser:true, devel: true */
-var TaskController = function() {
+var RoomController = function() {
   function setAjaxHandler() {
     $( document ).ajaxStart(function() {
       $("#main").addClass("loading");
@@ -18,10 +18,10 @@ var TaskController = function() {
   var Constructor = function () {
     var self = this;
     setAjaxHandler();
-    this.taskTemplate = _.template($("#task-template").html());
+    this.roomTemplate = _.template($("#room-template").html());
     this.load();
-    $("#post-task").click(function() {
-      self.postTask();
+    $("#post-room").click(function() {
+      self.postRoom();
     }.bind(this));
     $("section.options a.option")
     .addClass('selected')
@@ -49,19 +49,19 @@ var TaskController = function() {
     if (!checked('priority', task.priority)) {
       return false;
     }
-    if (_.includes(['개인', '가족', '업무'], task.category)) {
+    /*if (_.includes(['개인', '가족', '업무'], task.category)) {
       if (!checked('category', task.category)) {
         return false;
       }
     } else if (!checked('category', '기타')) {
       return false;
-    }
+    }*/
     return true;
   };
 
   Constructor.prototype.load = function() {
     var self = this;
-    $.getJSON("/tasks", function(data) {
+    $.getJSON("/rooms", function(data) {
       self.tasks = data;
       self.render();
       self.clearForm();
@@ -78,19 +78,19 @@ var TaskController = function() {
       }
       return "";
     });
-    $("ul.tasks").html(html.join("\n"));
-    $("ul.tasks .check").click(self.postDone.bind(this));
-    $(".task .remove").click(self.removeTask.bind(this));
+    $("ul.rooms").html(html.join("\n"));
+    //$("ul.tasks .check").click(self.postDone.bind(this));
+    //$(".task .remove").click(self.removeTask.bind(this));
   };
 
   Constructor.prototype.clearForm = function() {
-    $("#form-task input").val("");
-    $("#form-task select[name='category']").val("개인");
-    $("#form-task select[name='priority']").val("2");
-    $("#form-task input:first").focus();
+    $("#form-room input").val("");
+    $("#form-room select[name='fee']").val("");
+    //$("#form-task select[name='priority']").val("2");
+    $("#form-room input:first").focus();
   };
 
-  Constructor.prototype._findTask = function(e) {
+  Constructor.prototype._findRoom = function(e) {
     var el = $(e.currentTarget).closest('li');
     var id = el.data('id');
     return  _.find(this.tasks, {id: id});
@@ -103,14 +103,14 @@ var TaskController = function() {
     }
     var self = this;
     $.ajax({
-      url: '/tasks/' + task.id,
+      url: '/rooms/' + room.id,
       method: 'PUT',
       dataType: 'json',
       data: {
         done: task.done ? false : true
       },
       success: function(data) {
-        task.done = data.done;
+        room.done = data.done;
         self.render();
       }
     });
@@ -118,28 +118,28 @@ var TaskController = function() {
 
   Constructor.prototype.postTask = function() {
     var self = this;
-    $.post("/tasks", $("#form-task").serialize(), function(data) {
+    $.post("/rooms", $("#form-room").serialize(), function(data) {
       console.log(data);
-      self.tasks.push(data);
+      self.rooms.push(data);
       self.render();
       self.clearForm();
     });
   };
 
   Constructor.prototype.removeTask = function(e) {
-    var task = this._findTask(e);
-    if (!task) {
+    var task = this._findRoom(e);
+    if (!room) {
       return;
     }
     var self = this;
     if (confirm('정말로 삭제하시겠습니까?')) {
       $.ajax({
-        url: '/tasks/' + task.id,
+        url: '/rooms/' + task.id,
         method: 'DELETE',
         dataType: 'json',
         success: function(data) {
-          self.tasks = _.reject(self.tasks, function(t) {
-            return t.id === task.id;
+          self.rooms = _.reject(self.rooms, function(t) {
+            return t.id === room.id;
           });
           var el = $(e.currentTarget).closest('li');
           el.remove();
