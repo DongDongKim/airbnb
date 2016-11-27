@@ -1,7 +1,7 @@
 /*global $:false */
 /*global _:false */
 /*jslint browser:true, devel: true */
-var RoomController = function() {
+/*var RoomController = function() {
   function setAjaxHandler() {
     $( document ).ajaxStart(function() {
       $("#main").addClass("loading");
@@ -149,4 +149,4 @@ var RoomController = function() {
   };
 
   return Constructor;
-} ();
+} ();*/

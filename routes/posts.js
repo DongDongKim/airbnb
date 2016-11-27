@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var User = require('../models/User');
+var Room = require('../models/Room');
 
 /*function needAuth(req, res, next) {
   if (req.isAuthenticated()) {
@@ -10,12 +12,15 @@ var router = express.Router();
   }
 }
 */
-/*router.get('/', function(req, res, next) {
-  res.render('/');
+router.get('/', function(req, res, next) {
+  Room.find({},function(err,rooms){
+    res.render('posts',{rooms:rooms});
+  });
 });
-*/
-router.post('/', function(req, res, next) {
+
+
+/*router.post('/', function(req, res, next) {
   res.render('posts');
-});
+});*/
 
 module.exports = router;

@@ -40,7 +40,7 @@ router.post('/', function(req, res, next) {
     if (err) {
       return res.status(500).json({message: 'internal error', desc: err});
     }
-    res.status(201).json(doc);
+    res.redirect('posts')
   });
 });
 

@@ -2,23 +2,21 @@ ul.room
 
 .no-room 
   .alert.alert-info 방이 없습니다.
-script#room-template(type='text/template').
-  <li class='room <%= doneStr %>' data-id='<%= id %>'>
-    <span class='check'>
-      <i class='fa fa-check fa-lg'></i>
-    </span>
-    <span class='content'><%=content %></span>
-    <% if (city) { %>
-      <span class='label label-default category'> 
-        <%= city %>
-      </span>
-    <% } %>
-    <span class='city p<%= city%>'>
-    </span>
-    <a href='#' class='remove'><i class='fa fa-trash-o'></i></a>
-  </li>
-      
-script.
-  $(function() {
-    var todo = new TaskController();    
-  });
+
+h1.page-header List
+
+    
+  table.table.table-bordered
+   thead
+       tr
+         th 제목
+         th 가격
+         th
+     tbody
+       each room in rooms
+         tr
+           td= room.city
+           td= room.fee
+           td
+             a(href='/rooms/#{room.id}')= room.name
+           td= moment(room.createdAt).format('YYYY-MM-DD HH:mm:ss')
