@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  .container
+    h1.page-header Room
+          
+    ul
+      li Name: #{post.name}
+      li Content: #{post.content}
+    hr
+    p
+      a.btn.btn-default(href='/#{post.id}') Reservation

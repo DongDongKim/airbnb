@@ -12,7 +12,7 @@ var schema = new Schema({
   person:{type:Number,trim:true},
   during: Date,
   reservation: {type: Boolean, default: false},
- // user: {type: Schema.Types.ObjectId, required: true},
+  user: {type: Schema.Types.ObjectId, required: true},
   createdAt: {type: Date, default: Date.now}
 }, {
   toJSON: {
@@ -29,6 +29,7 @@ var schema = new Schema({
         person: room.person,
         during: (room.deadline) ? moment(room.deadline).format('YYYY-MM-DD') : "N/A",
         reservation: room.reservation,
+
 
       };
     }

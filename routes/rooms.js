@@ -11,7 +11,7 @@ function needAuth(req, res, next) {
   }
 }
 
-router.get('/', needAuth, function(req, res, next) {
+/*router.get('/', needAuth, function(req, res, next) {
   Room.find({user: req.user.id}, function(err, rooms) {
     if (err) {
       return res.status(500).json({message: 'interfefnal error', desc: err});
@@ -19,8 +19,8 @@ router.get('/', needAuth, function(req, res, next) {
     res.json(rooms);
   });
 });
-
-router.post('/', function(req, res, next) {
+*/
+router.post('/:id', function(req, res, next) {
   if (!req.body.content) {
     return res.status(400).json({message: 'need content'});
   }
@@ -33,18 +33,33 @@ router.post('/', function(req, res, next) {
     fee: req.body.fee,
     person:req.body.person,
     during: req.body.during,
-    reservation: req.body.reservation,
-    //user: "?"//req.user.id
+    user: req.params.id
   });
   newRoom.save(function(err, doc) {
     if (err) {
       return res.status(500).json({message: 'internal error', desc: err});
     }
-    res.redirect('posts')
+  });
+  Room.find({},function(err,rooms){
+    if(err)
+    {
+      return next(err);
+    }
+     res.render('posts',{rooms:rooms});
   });
 });
 
-router.put('/:id', needAuth, function(req, res, next) {
+router.get('/:id',function(req,res,next){
+   Room.findById(req.params.id, function(err, post) {
+    if (err) {
+      return next(err);
+    }
+    res.render('post_show',{post:post});
+  });
+});
+
+
+/*router.put('/:id', needAuth, function(req, res, next) {
   Room.findById(req.params.id, function(err, Room) {
     if (err) {
       return res.status(500).json({message: 'internal error', desc: err});
@@ -99,5 +114,5 @@ router.delete('/:id', needAuth, function(req, res, next) {
     res.json({id: Room._id});
   });
 });
-
+*/
 module.exports = router;

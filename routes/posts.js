@@ -18,6 +18,12 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.post('/', function(req, res, next) {
+  Room.find({city:req.body.position},function(err,rooms){
+    res.render('posts',{rooms:rooms});
+  });
+});
+
 
 /*router.post('/', function(req, res, next) {
   res.render('posts');

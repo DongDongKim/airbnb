@@ -10,13 +10,16 @@ h1.page-header List
    thead
        tr
          th 제목
+         th 도시
          th 가격
-         th
+         th 주인
+         th 예약
      tbody
        each room in rooms
          tr
+           td
+            a(href='/rooms/#{room.id}')= room.name
            td= room.city
            td= room.fee
-           td
-             a(href='/rooms/#{room.id}')= room.name
-           td= moment(room.createdAt).format('YYYY-MM-DD HH:mm:ss')
+           td= room.user
+           td= room.reservation
