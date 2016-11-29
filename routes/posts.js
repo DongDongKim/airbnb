@@ -3,7 +3,7 @@ var router = express.Router();
 var User = require('../models/User');
 var Room = require('../models/Room');
 
-/*function needAuth(req, res, next) {
+function needAuth(req, res, next) {
   if (req.isAuthenticated()) {
     next();
   } else {
@@ -11,14 +11,14 @@ var Room = require('../models/Room');
     res.redirect('/');
   }
 }
-*/
+
 router.get('/', function(req, res, next) {
   Room.find({},function(err,rooms){
     res.render('posts',{rooms:rooms});
   });
 });
 
-router.post('/', function(req, res, next) {
+router.post('/',needAuth, function(req, res, next) {
   Room.find({city:req.body.position},function(err,rooms){
     res.render('posts',{rooms:rooms});
   });

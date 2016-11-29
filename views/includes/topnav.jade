@@ -20,6 +20,8 @@
             a(href='/signout') Signout
           li
             a(href='/hosting/#{currentUser._id}') Hosting
+          li
+            a(href='/users/#{currentUser._id}/edit') Edit
         else
           li
             button.btn.btn-default(type='button', data-toggle='modal', data-target='#signin')  Signin

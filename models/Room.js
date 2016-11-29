@@ -13,7 +13,7 @@ var schema = new Schema({
   during: Date,
   reservation: {type: Boolean, default: false},
   user: {type: Schema.Types.ObjectId, required: true},
-  createdAt: {type: Date, default: Date.now}
+  createdAt: {type: Date, default: Date.now},
 }, {
   toJSON: {
     virtuals: true,
@@ -28,9 +28,7 @@ var schema = new Schema({
         fee: room.fee,
         person: room.person,
         during: (room.deadline) ? moment(room.deadline).format('YYYY-MM-DD') : "N/A",
-        reservation: room.reservation,
-
-
+        //reservation: room.reservation,
       };
     }
   },
