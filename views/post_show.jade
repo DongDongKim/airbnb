@@ -7,6 +7,14 @@ block content
     ul
       li Name: #{post.name}
       li Content: #{post.content}
+      li Fee: #{post.fee}
+      li Address: #{post.address}
+      li City: #{post.city}
+      li Convenience: #{post.convenience}
+      li Person: #{post.person}
     hr
     p
-      a.btn.btn-default(href='/#{post.id}') Reservation
+      if (#{post.reservation})
+        a.btn.btn-default(href='javascript:window.history.back();') Back
+      else
+        a.btn.btn-default(href='/#{post.id}') Reservation

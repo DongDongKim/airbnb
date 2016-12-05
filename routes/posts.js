@@ -3,6 +3,7 @@ var router = express.Router();
 var User = require('../models/User');
 var Room = require('../models/Room');
 
+
 function needAuth(req, res, next) {
   if (req.isAuthenticated()) {
     next();

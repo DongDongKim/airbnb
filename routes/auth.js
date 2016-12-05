@@ -5,7 +5,7 @@ module.exports = function(app, passport) {
     failureFlash : true // allow flash messages
   }));
 
-  app.get('/auth/facebook',
+ /* app.get('/auth/facebook',
     passport.authenticate('facebook', { scope : 'email' })
   );
 
@@ -18,15 +18,12 @@ module.exports = function(app, passport) {
       req.flash('success', '로그인되었습니다.');
       res.redirect('/posts');
     }
-  );
+  );*/
 
  app.get('/signout', function(req, res) {
     req.logout();
     req.flash('success', '로그아웃 되었습니다.');
     res.render('index');
   });
-/*  app.get('/hosting', function(req, res, next) {
-    res.render('hosting');
-  });*/
 };
   

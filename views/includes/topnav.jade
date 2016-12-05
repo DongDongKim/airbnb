@@ -10,18 +10,21 @@
         i.fa.fa-home
     #navbar.collapse.navbar-collapse
       ul.nav.navbar-nav
-        li
-          a(href='/users') Users
+        if (currentUser == Object('5835c60aba3f142bf08502e7'))    
+          li
+            a(href='/users') Users
       ul.nav.navbar-nav.navbar-right
         if (currentUser) 
           li
             a(href='/users/#{currentUser._id}') Profile
           li
-            a(href='/signout') Signout
+            a(href='/signout/#{currentUser._id}') Signout
           li
             a(href='/hosting/#{currentUser._id}') Hosting
           li
             a(href='/users/#{currentUser._id}/edit') Edit
+          li
+            a(href='/users/#{currentUser._id}?_method=DELETE') ID Delete
         else
           li
             button.btn.btn-default(type='button', data-toggle='modal', data-target='#signin')  Signin

@@ -39,20 +39,41 @@ function validateForm(form, options) {
   return null;
 }
 
+function checkForm(form, options) {
+  var name = form.name || "";
+  var email = form.email || "";
+  name = name.trim();
+  email = email.trim();
 
-/*router.get('/', needAuth, function(req, res, next) {
-  Room.find({user: req.user.id}, function(err, rooms) {
-    if (err) {
-      return res.status(500).json({message: 'interfefnal error', desc: err});
-    }
-    res.json(rooms);
-  });
-});
-*/
-router.post('/:id', function(req, res, next) {
-  if (!req.body.content) {
-    return res.status(400).json({message: 'need content'});
+  if (!name) {
+   req.flash('danger', '제목을 입력해주세요.');
+    return res.redirect('back');
   }
+
+  if (!form.content) {
+    req.flash('danger','내용을 입력해주세요.');
+    return res.resdirect('back');
+  }  
+  if (!form.address) {
+    req.flash('danger','주소을 입력해주세요.');
+    return res.resdirect('back');
+  }
+  if (typeof(form.fee)==='number') {
+    req.flash('danger','요금은 숫자로 입력해주세요.');
+    return res.resdirect('back');
+  }
+
+  return null;
+}
+
+
+router.post('/:id', function(req, res, next) {
+
+  if (typeof(req.body.fee) !=='number') {
+    req.flash('danger','요금은 숫자로 입력해주세요.');
+    return res.redirect('back');
+  }
+
   var newRoom = new Room({
     name: req.body.name,
     content: req.body.content,
