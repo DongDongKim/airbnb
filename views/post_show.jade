@@ -12,9 +12,10 @@ block content
       li City: #{post.city}
       li Convenience: #{post.convenience}
       li Person: #{post.person}
+      li Reservation: #{post.reservation}
     hr
     p
-      if (#{post.reservation})
+      if (post.reservation)
         a.btn.btn-default(href='javascript:window.history.back();') Back
       else
         a.btn.btn-default(href='/#{post.id}') Reservation

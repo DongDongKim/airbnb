@@ -8,10 +8,11 @@ block hero-unit
 block content
   .container
       form(action='/posts', method='POST')
-        label(for='position') 위치
-        input(type='postion', id='position', name='position' placeholder='city')
-        i.fa.fa-spin.fa-spinner
-        ul.suggest-box
+        .form
+          label(for='position') 위치
+          input(type='postion', id='position', name='position' placeholder='city')
+          i.fa.fa-spin.fa-spinner
+          ul.suggest-box
         label(for='date') 날짜
         input(type='checkin', id='checkin', name='checkin' placeholder='checkin')
         input(type='checkout', id='checkout', name='checkout' placeholder='checkout')

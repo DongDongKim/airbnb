@@ -10,9 +10,10 @@
         i.fa.fa-home
     #navbar.collapse.navbar-collapse
       ul.nav.navbar-nav
-        if (currentUser == Object('5835c60aba3f142bf08502e7'))    
-          li
-            a(href='/users') Users
+        if (currentUser)
+          if (currentUser._id == "5844e85cc46c5c225cf732ee")    
+            li
+              a(href='/users/#{currentUser._id}') Users
       ul.nav.navbar-nav.navbar-right
         if (currentUser) 
           li

@@ -1,8 +1,4 @@
 ul.room
-
-.no-room 
-  .alert.alert-info 방이 없습니다.
-
 h1.page-header List
 
     
@@ -21,5 +17,8 @@ h1.page-header List
             a(href='/rooms/#{room.id}')= room.name
            td= room.city
            td= room.fee
-           td= room.user
-           td= room.reservation
+           td= room.userName
+           if (room.reservation)
+            td impossible
+           else
+            td possible

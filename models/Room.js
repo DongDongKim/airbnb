@@ -8,11 +8,13 @@ var schema = new Schema({
   city: {type: String, trim: true},
   address: {type: String, trim: true},
   convenience: {type: String, trim: true},
-  fee: {type: Number, trim: true},
+  fee: {type: String, trim: true},
   person:{type:Number,trim:true},
   during: Date,
+  guest:{type: Schema.Types.ObjectId},
   reservation: {type: Boolean, default: false},
   user: {type: Schema.Types.ObjectId, required: true},
+  userName:{type:String, trim: true},
   createdAt: {type: Date, default: Date.now},
 }, {
   toJSON: {
