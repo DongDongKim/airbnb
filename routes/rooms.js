@@ -1,6 +1,7 @@
 var express = require('express'),
     User = require('../models/User'),
     Room = require('../models/Room');
+    Comment = require('../models/Comment');
 var router = express.Router();
 
 function needAuth(req, res, next) {
@@ -41,10 +42,7 @@ function validateForm(form, options) {
 
 
 router.post('/:id', function(req, res, next) {
-  var name;
-  User.findById(req.params.id,function(err,user){
-        name=user.name;
-  })
+
   var newRoom = new Room({
     name: req.body.name,
     content: req.body.content,
@@ -55,10 +53,8 @@ router.post('/:id', function(req, res, next) {
     person:req.body.person,
     during: req.body.during,
     user: req.params.id,
-    userName: name
   });
-
-  
+  newRoom.userName=req.user.name;
   newRoom.save(function(err, doc) {
     if (err) {
       return res.status(500).json({message: 'internal error', desc: err});
@@ -78,11 +74,42 @@ router.get('/:id',function(req,res,next){
     if (err) {
       return next(err);
     }
-    res.render('post_show',{post:post});
+    Comment.find({room:req.params.id},function(err,comments){
+      if (err) {
+        return next(err);
+      }
+      res.render('post_show',{post:post,comments:comments});
+    });
+
+   
   });
 });
 
-
+router.post('/comment/:id', function(req, res, next) {
+  var newComment=new Comment({
+    name:req.user.name,
+    content:req.body.content,
+    room:req.params.id
+  });
+  newComment.save(function(err){
+    if(err)
+    {
+      return next(err);
+    }
+    res.redirect('back');
+  });
+  /*Room.findById(req.params.id, function(err, post) {
+    if (err) {
+      return next(err);
+    }
+    Comment.find({room:req.params.id},function(err,comments){
+      if (err) {
+        return next(err);
+      }
+      res.render('post_show',{post:post,comments:comments});
+    });
+  });  */
+});
 /*router.put('/:id', needAuth, function(req, res, next) {
   Room.findById(req.params.id, function(err, Room) {
     if (err) {

@@ -111,14 +111,7 @@ router.delete('/:id', function(req, res, next) {
   });
 });
 
-router.get('/:id', function(req, res, next) {
-  User.findById(req.params.id, function(err, user) {
-    if (err) {
-      return next(err);
-    }
-    res.render('users/show', {user: user});
-  });
-});
+
 
 router.post('/', function(req, res, next) {
   var err = validateForm(req.body, {needPassword: true});

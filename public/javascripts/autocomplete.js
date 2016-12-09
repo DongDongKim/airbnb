@@ -1,3 +1,6 @@
+$(document).ready(function () {
+  //your code here
+
 $(function() {
   $('#position').keyup(function() {
     var query = $('#position').val() || "";
@@ -31,4 +34,5 @@ $(function() {
       }
     });
   });
+});
 });

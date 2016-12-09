@@ -14,8 +14,28 @@ block content
       li Person: #{post.person}
       li Reservation: #{post.reservation}
     hr
+    table.table.table-bordered
+      thead
+       tr
+         th 이름
+         th 내용
+         th 작성시간
+
+      tbody
+       each comment in comments
+         tr
+           td= comment.name
+           td= comment.content
+           td= moment(comment.createdAt).format('YYYY-MM-DD HH:mm:ss')
+
+    form(id='comment-form', action='comment/#{post.id}', method='POST')
+      label(for='name') comment
+      input(type='content', id='content', name='content', class='form-control', 
+          placeholder='content', required, autofocus)
+      button.btn.btn-default(type='submit') submit
     p
       if (post.reservation)
         a.btn.btn-default(href='javascript:window.history.back();') Back
       else
         a.btn.btn-default(href='/#{post.id}') Reservation
+        a.btn.btn-default(href='javascript:window.history.back();') Back

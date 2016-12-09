@@ -173,13 +173,13 @@ a {
 
 .jumbotron {
   margin-top: -1em;
-  background: url("/images/bg.jpg") no-repeat left top;
   -webkit-background-size: 100%;
   -moz-background-size: 100%;
   -o-background-size: 100%;
   background-size: 100%;
   min-height: 20em;
-  color: #fff;
+  color: red;
+  background: white;
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); }
 
 .form-actions {
@@ -202,7 +202,7 @@ a {
       color: #bbb; }
 
 .form {
-  position: relative; }
+  position: inline; }
   .form input {
     width: 15em; }
   .form .fa-spin {
@@ -224,3 +224,11 @@ a {
       list-style-type: none; }
       .form .suggest-box li:hover {
         background-color: #659CD8; }
+
+.room_form {
+  display: inline; }
+
+.room_button {
+  position: absolute;
+  right: 250px;
+  width: 200px; }

@@ -11,21 +11,23 @@
     #navbar.collapse.navbar-collapse
       ul.nav.navbar-nav
         if (currentUser)
-          if (currentUser._id == "5844e85cc46c5c225cf732ee")    
+          if (currentUser._id == "5849126ff2410d3594f6c838")    
             li
               a(href='/users/#{currentUser._id}') Users
       ul.nav.navbar-nav.navbar-right
         if (currentUser) 
           li
-            a(href='/users/#{currentUser._id}') Profile
+            a(href='/profile/#{currentUser._id}') Profile
           li
             a(href='/signout/#{currentUser._id}') Signout
           li
             a(href='/hosting/#{currentUser._id}') Hosting
           li
+            a(href='/room_list/#{currentUser._id}') Room_list
+          li
             a(href='/users/#{currentUser._id}/edit') Edit
           li
-            a(href='/users/#{currentUser._id}?_method=DELETE') ID Delete
+            a(href='/users/#{currentUser._id}?_method=DELETE') ID_Delete
         else
           li
             button.btn.btn-default(type='button', data-toggle='modal', data-target='#signin')  Signin
