@@ -60,13 +60,7 @@ router.post('/:id', function(req, res, next) {
       return res.status(500).json({message: 'internal error', desc: err});
     }
   });
-  Room.find({},function(err,rooms){
-    if(err)
-    {
-      return next(err);
-    }
-     res.render('posts',{rooms:rooms});
-  });
+  res.redirect('/');
 });
 
 router.get('/:id',function(req,res,next){

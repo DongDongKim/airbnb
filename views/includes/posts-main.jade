@@ -2,13 +2,13 @@ ul.room
 h1.page-header List
 
     
-  table.table.table-bordered
+  table.table.table-bordered(style="width:1em;")
    thead
        tr
          th 제목
          th 도시
-         th 가격
-         th 주인
+         th.reDe 가격
+         th.reDe 주인
          th 예약
      tbody
        each room in rooms
@@ -16,8 +16,8 @@ h1.page-header List
            td
             a(href='/rooms/#{room.id}')= room.name
            td= room.city
-           td= room.fee
-           td= room.userName
+           td.reDe= room.fee
+           td.reDe= room.userName
            if (room.permission)
             td impossible
            else

@@ -53,7 +53,7 @@ router.get('/profile/:id', function(req, res, next) {
 });
 router.get('/room_list/:id',function(req,res,next){
   Room.find({user:req.params.id},function(err,rooms) {
-    res.render('room_list',{rooms:rooms})
+    res.render('room_list',{rooms:rooms});
   });
 });
 

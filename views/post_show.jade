@@ -34,7 +34,7 @@ block content
           placeholder='content', required, autofocus)
       button.btn.btn-default(type='submit') submit
     p
-      if (post.reservation)
+      if (post.permission)
         a.btn.btn-default(href='javascript:window.history.back();') Back
       else
         a.btn.btn-default(href='/#{post.id}') Reservation

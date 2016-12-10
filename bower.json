@@ -1,9 +1,9 @@
 {
-  "name": "ex01",
+  "name": "Express",
   "version": "0.0.0",
-  "homepage": "https://github.com/dongseop/mju-class-wp",
+  "homepage": "",
   "authors": [
-    "Dongseop Kwon <dongseop@gmail.com>"
+    "Donghyun Kim<dongdong9335@gamil.com"
   ],
   "license": "MIT",
   "ignore": [
