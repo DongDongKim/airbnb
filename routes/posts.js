@@ -25,9 +25,4 @@ router.post('/',needAuth, function(req, res, next) {
   });
 });
 
-
-/*router.post('/', function(req, res, next) {
-  res.render('posts');
-});*/
-
 module.exports = router;
