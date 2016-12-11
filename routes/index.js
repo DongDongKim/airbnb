@@ -62,7 +62,6 @@ router.get('/suggest', function(req, res, next) {
   var ret = _.filter(countries, function(name) {
     return name.toLowerCase().indexOf(position.toLowerCase()) > -1;
   });
-  // JSON으로 결과를 return
   res.json(ret);
 });
 

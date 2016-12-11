@@ -15,7 +15,6 @@ var schema = new Schema({
         id: room._id.toString(),
         name: room.name,
         content: room.content,
-        //reservation: room.reservation,
       };
     }
   },

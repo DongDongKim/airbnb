@@ -32,7 +32,6 @@ var schema = new Schema({
         fee: room.fee,
         person: room.person,
         during: (room.deadline) ? moment(room.deadline).format('YYYY-MM-DD') : "N/A",
-        //reservation: room.reservation,
       };
     }
   },
